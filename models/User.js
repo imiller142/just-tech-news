@@ -20,9 +20,30 @@ User.init(
     },
     // define a username column
     username: {
+        type: Datatypes.STRING,
+        allowNull: false
+    },
+    //defin an email collumn
+    email: {
 
-    }
-
+        type: Datatypes.STRING,
+        allowNull: false,
+        //there cannot be any duplicate email values in this table
+        unique: true,
+        // if allownull is set to false, we can run our data through validators before creating the table data
+        validate: {
+            isEmail: true
+        }
+    },
+    //define password column
+    password: {
+        type: Datatypes.STRING,
+        allowNull: false,
+        validate: {
+            //this means the password must be at  least four characters long
+            len: [4]
+        }
+      }
     },
 
     {
@@ -40,3 +61,5 @@ User.init(
         modelName: 'user'
     }
 );
+
+module.exports = User;
